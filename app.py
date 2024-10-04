@@ -21,11 +21,12 @@ class AdsView(MethodView):
             return jsonify([ad.dict for ad in ads])
         else:
             ads_id = request.session.get(Ads, id)
+        if ads_id is None:
+            return jsonify({"error": "ID not found"}), 404
+        else:
             return jsonify(ads_id.dict)
     
     def post(self):
-        if request.session.query(Ads).filter_by(user=request.json['user']).first():
-            return jsonify({"error": "Ad with the same name already exists"}), 400
         new_ads = Ads(**request.json)
         request.session.add(new_ads)
         request.session.commit()

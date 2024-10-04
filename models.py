@@ -22,7 +22,7 @@ class Base(DeclarativeBase):
 class Ads(Base):
     __tablename__ = 'Ads'
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    user: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
+    user: Mapped[str] = mapped_column(String(120), nullable=False)
     heading: Mapped[str] = mapped_column(String(120), nullable=False)
     description: Mapped[str] = mapped_column(String(250), nullable=False)
     date: Mapped[datetime.datetime] = mapped_column(DateTime, server_default=func.now())
